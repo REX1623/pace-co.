@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BATIK.ID | Link Bio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="phone">
+
+  <!-- PROFIL LINK BIO -->
+  <header class="profile">
+    <img src=".//images/profil.png" alt="Foto Profil" class="profile-img">
+    <h1>Batik.id</h1>
+    <p>Fashion tradisional • nyaman • kekinian</p>
+
+    <div class="social">
+      <a href="https://www.instagram.com/heazz17?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" target="_blank">Instagram</a>
+      <a href="https://wa.me/6282274390654" target="_blank">WhatsApp</a>
+    </div>
+  </header>
+
+  <!-- SEARCH -->
+  <section class="search-box">
+    <input type="text" id="searchInput" placeholder="Cari kemeja batik, blouse, outer...">
+  </section>
+
+  <!-- FILTER -->
+  <div class="filter">
+    <button class="filter-btn active" data-category="semua">Semua</button>
+    <button class="filter-btn" data-category="kemeja">Kemeja</button>
+    <button class="filter-btn" data-category="blouse">Blouse</button>
+    <button class="filter-btn" data-category="outer">Outer</button>
+    <button class="filter-btn" data-category="kaos">Kaos Batik</button>
+  </div>
+
+  <!-- KATALOG -->
+  <section class="catalog">
+    <div class="catalog-head">
+      <div>
+        <h2>Katalog Baju</h2>
+        <p>Pilih produk favoritmu</p>
+      </div>
+      <button class="cart-open" onclick="bukaKeranjang()">
+        🛒 <span id="jumlahKeranjang">0</span>
+      </button>
+    </div>
+
+    <div id="productList" class="product-list"></div>
+  </section>
+
+  <footer>
+    <p>© 2026 Batik.id</p>
+  </footer>
+</div>
+
+<!-- KERANJANG -->
+<div id="cartModal" class="modal">
+  <div class="cart">
+    <div class="cart-header">
+      <div>
+        <h2>Keranjang Belanja</h2>
+        <p>Atur jumlah produk sebelum checkout</p>
+      </div>
+      <button class="close" onclick="tutupKeranjang()">×</button>
+    </div>
+
+    <div id="cartList"></div>
+
+    <div class="total">
+      <span>Total Harga</span>
+      <strong id="totalHarga">Rp0</strong>
+    </div>
+
+    <button class="checkout" onclick="checkoutWhatsApp()">
+      Checkout via WhatsApp
+    </button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
