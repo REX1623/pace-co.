@@ -1,45 +1,113 @@
 const produk = [
+  // --- KATEGORI 1: DAILY TRAINER (5 PRODUK) ---
   {
     id: 1,
-    nama: "Kemeja Batik Pria Slimfit",
-    kategori: "kemeja",
-    harga: 165000,
-    gambar: "./images/Batik Pria Slimfit.jpg"
+    nama: "Nike Air Zoom Pegasus 41 - Baltic Blue",
+    kategori: "daily",
+    harga: 2099000,
+    gambar: "./images/Nike Air Zoom Pegasus 41.jpg"
   },
   {
     id: 2,
-    nama: "Blouse Batik Wanita Modern",
-    kategori: "blouse",
-    harga: 145000,
-    gambar: "./images/Batik Wanita Blouse.jpg"
+    nama: "ASICS Gel-Nimbus 26",
+    kategori: "daily",
+    harga: 2499000,
+    gambar: "./images/ASICS Gel-Nimbus 26.jpg"
   },
   {
     id: 3,
-    nama: "Outer Batik Casual",
-    kategori: "outer",
-    harga: 175000,
-    gambar: "./images/Outer Batik Casual.jpg"
+    nama: "Adidas Adizero Boston 12",
+    kategori: "daily",
+    harga: 2299000,
+    gambar: "./images/Adidas Adizero Boston 12.jpg"
   },
   {
     id: 4,
-    nama: "Tunike Batik Panjang",
-    kategori: "blouse",
-    harga: 185000,
-    gambar: "./images/Tunike Batik Panjang.jpg"
+    nama: "Ortuseight Hyperblast 2.0 - Neon Cyan",
+    kategori: "daily",
+    harga: 599000,
+    gambar: "./images/Ortuseight Hyperblast 2.0.jpg"
   },
   {
     id: 5,
-    nama: "Kaos Motif Batik Kontemporer",
-    kategori: "kaos",
-    harga: 95000,
-    gambar: "./images/Kaos Motif Batik Kontemporer.jpg"
+    nama: "910 Nineten Haze Vision - White/Gold",
+    kategori: "daily",
+    harga: 649000,
+    gambar: "./images/910 Nineten Haze Vision.jpg"
   },
+
+  // --- KATEGORI 2: CARBON / RACE SHOE (5 PRODUK) ---
   {
     id: 6,
-    nama: "Kemeja Batik Premium",
-    kategori: "kemeja",
-    harga: 220000,
-    gambar: "./images/Kemeja Batik Premium.jpg"
+    nama: "ASICS Metaspeed Edge Paris",
+    kategori: "carbon",
+    harga: 3899000,
+    gambar: "./images/ASICS Metaspeed Edge Paris.jpg"
+  },
+  {
+    id: 7,
+    nama: "Adidas Adios Pro 3",
+    kategori: "carbon",
+    harga: 3399000,
+    gambar: "./images/Adidas Adios Pro 3.jpg"
+  },
+  {
+    id: 8,
+    nama: "Nike Vaporfly 3",
+    kategori: "carbon",
+    harga: 3899000,
+    gambar: "./images/Nike Vaporfly 3.jpg"
+  },
+  {
+    id: 9,
+    nama: "Ortuseight Solar Pack Carbon",
+    kategori: "carbon",
+    harga: 1299000,
+    gambar: "./images/Ortuseight Solar Pack Carbon.jpg"
+  },
+  {
+    id: 10,
+    nama: "910 Nineten Geist Ekiden",
+    kategori: "carbon",
+    harga: 999000,
+    gambar: "./images/910 Nineten Geist Ekiden.jpg"
+  },
+
+  // --- KATEGORI 3: APPAREL & AKSESORIS (5 PRODUK) ---
+  {
+    id: 11,
+    nama: "Pace & Co. Elite Pro Singlet",
+    kategori: "apparel",
+    harga: 275000,
+    gambar: "./images/Elite Pro Singlet.jpg"
+  },
+  {
+    id: 12,
+    nama: "ASICS Performance Running Socks (3-Pack)",
+    kategori: "apparel",
+    harga: 150000,
+    gambar: "./images/ASICS Performance Running Socks.jpg"
+  },
+  {
+    id: 13,
+    nama: "Nike Dri-FIT Challenger Running Shorts",
+    kategori: "apparel",
+    harga: 599000,
+    gambar: "./images/Nike Dri-FIT Challenger Running Shorts.jpg"
+  },
+  {
+    id: 14,
+    nama: "Ortuseight Running Cap - Black",
+    kategori: "apparel",
+    harga: 139000,
+    gambar: "./images/Ortuseight Running Cap - Black.jpg"
+  },
+  {
+    id: 15,
+    nama: "Adidas Running Waist Bag",
+    kategori: "apparel",
+    harga: 350000,
+    gambar: "./images/Adidas Running Waist Bag.jpg"
   }
 ];
 
@@ -201,28 +269,29 @@ function checkoutWhatsApp() {
     return;
   }
 
-  let pesan = "Halo StyleKita, saya ingin memesan batik:%0A%0A";
+  // Membuat string rincian pesan secara langsung dari data keranjang yang valid
+  let rincianPesanan = "";
+  let totalBelanja = 0;
 
-  keranjang.forEach(item => {
+  keranjang.forEach((item, index) => {
     const data = produk.find(x => x.id === item.id);
-    const subtotal = data.harga * item.jumlah;
-
-    pesan +=
-      "• " + data.nama +
-      " | " + item.jumlah + " pcs" +
-      " | " + formatRupiah(subtotal) +
-      "%0A";
+    if (data) {
+      const subtotal = data.harga * item.jumlah;
+      totalBelanja += subtotal;
+      rincianPesanan += `• ${data.nama} (${item.jumlah} pcs) - ${formatRupiah(subtotal)}%0A`;
+    }
   });
 
-  pesan +=
-    "%0ATotal: " + formatRupiah(hitungTotal()) +
-    "%0A%0ANama:%0AAlamat:%0ACatatan:";
+  // Menyusun format pesan lengkap agar terbaca sempurna oleh WhatsApp
+  let pesanFinal = "Halo Pace & Co., saya ingin memesan produk berikut:%0A%0A" + 
+                   rincianPesanan + 
+                   "%0ATotal Keseluruhan: " + formatRupiah(totalBelanja) + 
+                   "%0A%0ANama:%0AAlamat Lengkap & Ukuran (Size):%0ACatatan:";
 
-  // GANTI NOMOR INI DENGAN NOMOR WHATSAPP TOKO ANDA
-  const nomorWhatsApp = "6282274390654";
+  const nomorWhatsApp = "6281515453116"; 
 
   window.open(
-    "https://wa.me/" + nomorWhatsApp + "?text=" + pesan,
+    "https://wa.me/" + nomorWhatsApp + "?text=" + pesanFinal,
     "_blank"
   );
 }
